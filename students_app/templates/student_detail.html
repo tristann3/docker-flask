@@ -1,0 +1,31 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>{{ student.first_name }} {{ student.last_name }}</h1>
+
+<h3>Classes</h3>
+<ul>
+  {% for class in student.classes %}
+  <li><a href="/class/{{ class.id }}">{{ class.title }}</a></li>
+  {% endfor %}
+</ul>
+
+
+<form method="POST" action="{{ url_for('main.student_detail', student_id=student.id) }}">
+  {{ form.csrf_token }}
+  <fieldset>
+    <legend>Edit {{ form.first_name.data }}'s Info</legend>
+
+    {{ form.first_name.label }}
+    {{ form.first_name }}
+
+    {{ form.last_name.label }} 
+    {{ form.last_name }}
+
+    {{ form.classes.label}}
+    {{ form.classes }}
+
+    {{ form.submit }}
+  </fieldset>
+</form>
+
+{% endblock %}

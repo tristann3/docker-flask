@@ -1,0 +1,27 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>{{ class_object.title }} by <a href="/professor/{{ class_object.professor.id }}">{{ class_object.professor.first_name }} {{ class_object.professor.last_name}}</a></h1>
+
+<h3>Students</h3>
+<ul>
+  {% for student in class_object.students %}
+  <li><a href="/student/{{ student.id }}">{{ student.first_name }} {{ student.last_name }}</a></li>
+  {% endfor %}
+</ul>
+
+<form method="POST" action="{{ url_for('main.class_detail', class_id=class_object.id) }}">
+  {{ form.csrf_token }}
+  <fieldset>
+    <legend>Edit {{ form.title.data }} Info</legend>
+
+    {{ form.title.label }}
+    {{ form.title }}
+
+    {{ form.professor.label }}
+    {{ form.professor }}
+
+    {{ form.submit }}
+  </fieldset>
+</form>
+
+{% endblock %}

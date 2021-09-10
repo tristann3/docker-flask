@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="POST" action="{{ url_for('main.create_class') }}">
+    {{ form.csrf_token }}
+    <fieldset>
+        <legend>Enter Class Details</legend>
+
+        {{ form.title.label }}
+        {{ form.title }}
+        <ul>
+        {% for error in form.title.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
+        {{ form.professor.label }}
+        {{ form.professor }}
+        <ul>
+        {% for error in form.professor.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+        
+        {{ form.submit }}
+    </fieldset>
+</form>
+
+{% endblock %}
